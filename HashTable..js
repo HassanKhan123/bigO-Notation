@@ -33,9 +33,42 @@ class HashTable {
 
     return undefined;
   }
+
+  keys() {
+    const keysArray = [];
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i]) {
+        keysArray.push(this.data[i][0][0]);
+      }
+    }
+    return keysArray;
+  }
 }
 
 const myHashTable = new HashTable(50);
 myHashTable.set("grapes", 10000);
+myHashTable.set("apples", 1000);
+const keys = myHashTable.keys();
+
 const data = myHashTable.get("grapes");
 console.log(data);
+console.log(keys);
+
+// returns first occuerence of number
+
+function firstOccuerence(arr) {
+  let key = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    if (key[arr[i]] !== undefined) {
+      return arr[i];
+    } else {
+      key[arr[i]] = 1;
+    }
+  }
+
+  return undefined;
+}
+
+const arr = firstOccuerence([2, 2, 1, 1, 4, 6, 6]);
+console.log(arr);
