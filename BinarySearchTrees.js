@@ -52,6 +52,74 @@ class BinarySearchTree {
 
     return false;
   }
+
+  breadthFirstSearch() {
+    let currentNode = this.root;
+    let list = [];
+    let queue = [];
+
+    queue.push(currentNode);
+    while (queue.length > 0) {
+      currentNode = queue.shift();
+      list.push(currentNode.value);
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+
+    return list;
+  }
+
+  depthFirstSearchInOrder() {
+    return traverseInOrder(this.root, []);
+  }
+
+  depthFirstSearchPreOrder() {
+    return traversePreOrder(this.root, []);
+  }
+
+  depthFirstSearchPostOrder() {
+    return traversePostOrder(this.root, []);
+  }
+}
+
+function traverseInOrder(node, list) {
+  if (node.left) {
+    traverseInOrder(node.left, list);
+  }
+  list.push(node.value);
+
+  if (node.right) {
+    traverseInOrder(node.right, list);
+  }
+  return list;
+}
+
+function traversePreOrder(node, list) {
+  list.push(node.value);
+  if (node.left) {
+    traversePreOrder(node.left, list);
+  }
+
+  if (node.right) {
+    traversePreOrder(node.right, list);
+  }
+  return list;
+}
+
+function traversePostOrder(node, list) {
+  if (node.left) {
+    traversePostOrder(node.left, list);
+  }
+
+  if (node.right) {
+    traversePostOrder(node.right, list);
+  }
+  list.push(node.value);
+  return list;
 }
 
 const tree = new BinarySearchTree();
@@ -62,8 +130,13 @@ tree.insert(1);
 tree.insert(6);
 tree.insert(15);
 tree.insert(170);
-const node = tree.lookup(911);
-console.log(node);
+let bfs = tree.breadthFirstSearch();
+let dfsInOrder = tree.depthFirstSearchInOrder();
+let dfsPreOrder = tree.depthFirstSearchPreOrder();
+let dfsPostOrder = tree.depthFirstSearchPostOrder();
+console.log(dfsInOrder);
+console.log(dfsPreOrder);
+console.log(dfsPostOrder);
 // console.log(tree);
 
 //      9
